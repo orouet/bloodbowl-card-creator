@@ -5,67 +5,73 @@
     font-family: "rodchenkoctt";
     font-style: normal;
     font-weight: normal;
-    src: url("../fonts/rodchenkoctt.eot");
+    /* src: url("../fonts/rodchenkoctt.eot");
     src: url("../fonts/rodchenkoctt.eot?#iefix") format("embedded-opentype"),
         url("../fonts/rodchenkoctt.woff2") format("woff2"),
         url("../fonts/rodchenkoctt.woff") format("woff"),
         url("../fonts/rodchenkoctt.ttf") format("truetype"),
-        url("../fonts/rodchenkoctt.svg#rodchenkoctt") format("svg");
+        url("../fonts/rodchenkoctt.svg#rodchenkoctt") format("svg"); */
+    src: url("../fonts/rodchenkoctt.woff2") format("woff2");
 }
 
 @font-face {
     font-family: "bank-gothic";
     font-style: normal;
     font-weight: normal;
-    src: url("../fonts/bank-gothic-medium-bt.eot");
+    /* src: url("../fonts/bank-gothic-medium-bt.eot");
     src: url("../fonts/bank-gothic-medium-bt.eot?#iefix") format("embedded-opentype"),
         url("../fonts/bank-gothic-medium-bt.woff2") format("woff2"),
         url("../fonts/bank-gothic-medium-bt.woff") format("woff"),
-        url("../fonts/bank-gothic-medium-bt.ttf") format("truetype");
+        url("../fonts/bank-gothic-medium-bt.ttf") format("truetype"); */
+    src: url("../fonts/bank-gothic-medium-bt.woff2") format("woff2");
 }
 
 @font-face {
     font-family: "built-titling";
     font-style: normal;
     font-weight: normal;
-    src: url("../fonts/built-titling-sb.eot");
+    /* src: url("../fonts/built-titling-sb.eot");
     src: url("../fonts/built-titling-sb.eot?#iefix") format("embedded-opentype"),
         url("../fonts/built-titling-sb.woff2") format("woff2"),
         url("../fonts/built-titling-sb.woff") format("woff"),
-        url("../fonts/built-titling-sb.ttf") format("truetype");
+        url("../fonts/built-titling-sb.ttf") format("truetype"); */
+    src: url("../fonts/built-titling-sb.woff2") format("woff2");
 }
 
 @font-face {
     font-family: "frutiger-light";
     font-style: normal;
     font-weight: normal;
-    src: url("../fonts/FrutigerLTStd-Light.eot");
+    /* src: url("../fonts/FrutigerLTStd-Light.eot");
     src: url("../fonts/FrutigerLTStd-Light.eot?#iefix") format("embedded-opentype"),
         url("../fonts/FrutigerLTStd-Light.woff2") format("woff2"),
         url("../fonts/FrutigerLTStd-Light.woff") format("woff"),
-        url("../fonts/FrutigerLTStd-Light.ttf") format("truetype");
+        url("../fonts/FrutigerLTStd-Light.ttf") format("truetype"); */
+    src: url("../fonts/FrutigerLTStd-Light.woff2") format("woff2");
 }
 
 @font-face {
     font-family: "franklin-gothic-book";
     font-style: normal;
     font-weight: normal;
-    src: url("../fonts/franklin-gothic-book.eot");
+    /* src: url("../fonts/franklin-gothic-book.eot");
     src: url("../fonts/franklin-gothic-book.eot?#iefix") format("embedded-opentype"),
         url("../fonts/franklin-gothic-book.woff2") format("woff2"),
         url("../fonts/franklin-gothic-book.woff") format("woff"),
-        url("../fonts/franklin-gothic-book.ttf") format("truetype");
+        url("../fonts/franklin-gothic-book.ttf") format("truetype"); */
+    src: url("../fonts/franklin-gothic-book.woff2") format("woff2");
 }
 
 @font-face {
     font-family: "brothers-regular";
     font-style: normal;
     font-weight: normal;
-    src: url("../fonts/brothers-regular.eot");
+    /* src: url("../fonts/brothers-regular.eot");
     src: url("../fonts/brothers-regular.eot?#iefix") format("embedded-opentype"),
         url("../fonts/brothers-regular.woff2") format("woff2"),
         url("../fonts/brothers-regular.woff") format("woff"),
-        url("../fonts/brothers-regular.ttf") format("truetype");
+        url("../fonts/brothers-regular.ttf") format("truetype"); */
+    src: url("../fonts/brothers-regular.woff2") format("woff2");
 }
 
 ::selection {
