@@ -1,51 +1,57 @@
----
-# this is an empty front matter
----
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
+
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    
     <meta name="format-detection" content="date=no">
     <meta name="format-detection" content="telephone=no">
-    <meta name="viewport"
-        content="initial-scale=1, maximum-scale=1, shrink-to-fit=no, user-scalable=no, width=device-width">
-    <title>Blood Bowl Card Creator</title>
+    <!-- <meta name="viewport" content="initial-scale=1, maximum-scale=1, shrink-to-fit=no, user-scalable=no, width=device-width"> -->
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1, shrink-to-fit=no, width=device-width">
     <meta name="color-scheme" content="dark light">
-    <link rel="stylesheet" href="assets/css/main.css">
-    <link rel="apple-touch-icon" sizes="180x180" href="assets/favicons/apple-touch-icon.png">
-    <link rel="icon" type="image/png" sizes="32x32" href="assets/favicons/favicon-32x32.png">
-    <link rel="icon" type="image/png" sizes="16x16" href="assets/favicons/favicon-16x16.png">
-    <link rel="manifest" href="assets/favicons/site.webmanifest">
-    <link rel="mask-icon" href="assets/favicons/safari-pinned-tab.svg" color="#ff0000">
     <meta name="msapplication-TileColor" content="#ff0000">
     <meta name="theme-color" content="#ff0000">
+    
+    <link rel="stylesheet" href="node_modules/bootstrap/dist/css/bootstrap.min.css">
+    <!-- <link rel="stylesheet" href="node_modules/bootswatch/dist/darkly/bootstrap.css"> -->
+    <!-- <link rel="stylesheet" href="node_modules/bootswatch/dist/flatly/bootstrap.css"> -->
+    
+    <link rel="stylesheet" href="assets/css/main.css">
+    
+    <link rel="apple-touch-icon" sizes="180x180" href="assets/favicons/apple-touch-icon.png">
+    
+    <link rel="icon" type="image/png" sizes="32x32" href="assets/favicons/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="assets/favicons/favicon-16x16.png">
+    
+    <link rel="manifest" href="assets/favicons/site.webmanifest">
+    <link rel="mask-icon" href="assets/favicons/safari-pinned-tab.svg" color="#ff0000">
+    
+    <title>Blood Bowl Card Creator</title>
+
 </head>
 
 <body>
-    <div class="font-hack2 sr-only" style="font-family:'built-titling';visibility:hidden;">Nothing to see here, move
-        along…</div>
-    <div class="font-hack3 sr-only" style="font-family:'brothers-regular';visibility:hidden;">Nothing to see here, move
-        along…</div>
-    <div class="font-hack3 sr-only" style="font-family:'franklin-gothic-book';visibility:hidden;">Nothing to see here, move
-        along…</div>
-
     <div class="container-fluid">
-
         <nav class="mt-2 navbar navbar-expand-lg p-0">
-
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
-                aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <button
+                class="navbar-toggler"
+                type="button"
+                data-toggle="collapse"
+                data-target="#navbarSupportedContent"
+                aria-controls="navbarSupportedContent"
+                aria-expanded="false"
+                aria-label="Toggle navigation"
+            >
                 <span class="navbar-toggler-icon"></span>
             </button>
-
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
-
                 <ul class="navbar-nav nav nav-tabs">
                     <li class="nav-item">
-                        <a class="nav-link" href="https://optimalgamestate.com"><img src="assets/img/ogs_logo.png"
-                                width="150" height="30"></a>
+                        <a class="nav-link" href="https://optimalgamestate.com">
+                            <img src="assets/img/ogs_logo.png" width="150" height="30" alt="OGS Logo">
+                        </a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link active" href="index.html" onclick="onClearCache()">Player Card</a>
@@ -55,16 +61,261 @@
                     </li>
                 </ul>
             </div>
-
         </nav>
-
-        {% include tabs/tabContentCard.html %}
-
+        <div class="row mt-3">
+            <div class="col-lg-6 col-xl-4">
+                <img id="art" style="display: none;" src="assets/img/card/art.png" alt="Art">
+                <img id="bg1" style="display: none;" src="assets/img/card/bloodbowl_card.png" alt="Blood Bowl Card">
+                <img id="frame" style="display: none;" src="assets/img/card/bloodbowl_frame.png" alt="Blood Bowl Frame">
+                <img id="border" style="display: none;" src="assets/img/card/bloodbowl_border.png" alt="Blood Bowl Border">
+                <img id="sf-" style="display: none;" src="assets/img/card/numbers/sf-.png" alt="-">
+                <img id="sf+" style="display: none;" src="assets/img/card/numbers/sf+.png" alt="+">
+                <img id="sf0" style="display: none;" src="assets/img/card/numbers/sf0.png" alt="0">
+                <img id="sf1" style="display: none;" src="assets/img/card/numbers/sf1.png" alt="1">
+                <img id="sf2" style="display: none;" src="assets/img/card/numbers/sf2.png" alt="2">
+                <img id="sf3" style="display: none;" src="assets/img/card/numbers/sf3.png" alt="3">
+                <img id="sf4" style="display: none;" src="assets/img/card/numbers/sf4.png" alt="4">
+                <img id="sf5" style="display: none;" src="assets/img/card/numbers/sf5.png" alt="5">
+                <img id="sf6" style="display: none;" src="assets/img/card/numbers/sf6.png" alt="6">
+                <img id="sf7" style="display: none;" src="assets/img/card/numbers/sf7.png" alt="7">
+                <img id="sf8" style="display: none;" src="assets/img/card/numbers/sf8.png" alt="8">
+                <img id="sf9" style="display: none;" src="assets/img/card/numbers/sf9.png" alt="9">
+                <canvas id="canvas" class="canvas rounded" width="822" height="1122">Sorry, your browser doesn't support the &lt;canvas&gt; element.</canvas>
+            </div>
+            <div class="col-lg-6 col-xl-8">
+                <div id="MenuPrincipal" class="accordion">
+                    <div class="accordion-item">
+                        <h2 id="Player_Description_Titre" class="accordion-header">
+                            <button
+                                class="accordion-button"
+                                type="button"
+                                data-bs-toggle="collapse"
+                                data-bs-target="#Player_Description_Contenu"
+                                aria-expanded="true"
+                                aria-controls="Player_Description_Contenu"
+                            >Description</button>
+                        </h2>
+                        <div id="Player_Description_Contenu" class="accordion-collapse collapse show" aria-labelledby="Player_Description_Titre" data-bs-parent="#MenuPrincipal">
+                            <div class="accordion-body">
+                                <div class="form-group">
+                                    <label for="teamName">Team Name</label>
+                                    <input id="teamName" name="teamName" class="form-control" type="text" value=" " oninput="onAnyChange()">
+                                </div>
+                                <div class="form-group">
+                                    <label for="cardName">Player Name</label>
+                                    <input id="cardName" name="cardName" class="form-control" type="text" value=" " oninput="onAnyChange()">
+                                </div>
+                                <div class="form-group">
+                                    <label for="positionName">Position</label>
+                                    <input id="positionName" name="positionName" class="form-control" type="text" value=" " oninput="onAnyChange()">
+                                </div>
+                                <div class="form-group">
+                                    <label for="footer">GP</label>
+                                    <input id="footer" name="footer" class="form-control" type="text" value=" " oninput="onAnyChange()">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="accordion-item">
+                        <h2 id="Player_Stats_Titre" class="accordion-header">
+                            <button
+                                class="accordion-button"
+                                type="button"
+                                data-bs-toggle="collapse"
+                                data-bs-target="#Player_Stats_Contenu"
+                                aria-expanded="true"
+                                aria-controls="Player_Stats_Contenu"
+                            >Stats</button>
+                        </h2>
+                        <div id="Player_Stats_Contenu" class="accordion-collapse collapse" aria-labelledby="Player_Stats_Titre" data-bs-parent="#MenuPrincipal">
+                            <div class="accordion-body">
+                                <div class="row mt-2">
+                                    <div class="col">
+                                        <div class="form-group">
+                                            <label for="ma">MA</label>
+                                            <input id="ma" name="ma" class="form-control" type="number" min="0" max="9" value="4" oninput="onAnyChange()">
+                                        </div>
+                                    </div>
+                                    <div class="col">
+                                        <div class="form-group">
+                                            <label for="st">ST</label>
+                                            <input id="st" name="st" class="form-control" type="number" min="0" max="8" value="3" oninput="onAnyChange()">
+                                        </div>
+                                    </div>
+                                    <div class="col">
+                                        <div class="form-group">
+                                            <label for="ag">AG</label>
+                                            <input id="ag" name="ag" class="form-control" type="number" min="0" max="6" value="3" oninput="onAnyChange()">
+                                        </div>
+                                    </div>
+                                    <div class="col">
+                                        <div class="form-group">
+                                            <label for="pa">PA</label>
+                                            <input id="pa" name="pa" class="form-control" type="number" min="0" max="6" value="3" oninput="onAnyChange()">
+                                        </div>
+                                    </div>
+                                    <div class="col">
+                                        <div class="form-group">
+                                            <label for="av">AV</label>
+                                            <input id="av" name="av" class="form-control" type="number" min="0" max="11" value="9" oninput="onAnyChange()">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="accordion-item">
+                        <h2 id="Player_Skills_Titre" class="accordion-header">
+                            <button
+                                class="accordion-button"
+                                type="button"
+                                data-bs-toggle="collapse"
+                                data-bs-target="#Player_Skills_Contenu"
+                                aria-expanded="true"
+                                aria-controls="Player_Skills_Contenu"
+                            >Skills</button>
+                        </h2>
+                        <div id="Player_Skills_Contenu" class="accordion-collapse collapse" aria-labelledby="Player_Skills_Titre" data-bs-parent="#MenuPrincipal">
+                            <div class="accordion-body">
+                                <div class="row mt-2">
+                                    <label>Primary Skills</label>
+                                    <div class="col">
+                                        <label for="p_agility">A</label>
+                                        <input id="p_agility" name="p_agility" type="checkbox" oninput="onAnyChange()">
+                                    </div>
+                                    <div class="col">
+                                        <label for="p_general">G</label>
+                                        <input id="p_general" name="p_general" type="checkbox" oninput="onAnyChange()">
+                                    </div>
+                                    <div class="col">
+                                        <label for="p_mutations">M</label>
+                                        <input id="p_mutations" name="p_mutations" type="checkbox" oninput="onAnyChange()">
+                                    </div>
+                                    <div class="col">
+                                        <label for="p_passing">P</label>
+                                        <input id="p_passing" name="p_passing" type="checkbox" oninput="onAnyChange()">
+                                    </div>
+                                    <div class="col">
+                                        <label for="p_strength">S</label>
+                                        <input id="p_strength" name="p_strength" type="checkbox" oninput="onAnyChange()">
+                                    </div>
+                                </div>
+                                <div class="row mt-2">
+                                    <label>Secondary Skills</label>
+                                    <div class="col">
+                                        <label for="s_agility">A</label>
+                                        <input id="s_agility" name="s_agility" type="checkbox" oninput="onAnyChange()">
+                                    </div>
+                                    <div class="col">
+                                        <label for="s_general">G</label>
+                                        <input id="s_general" name="s_general" type="checkbox" oninput="onAnyChange()">
+                                    </div>
+                                    <div class="col">
+                                        <label for="s_mutations">M</label>
+                                        <input id="s_mutations" name="s_mutations" type="checkbox" oninput="onAnyChange()">
+                                    </div>  
+                                    <div class="col">
+                                        <label for="s_passing">P</label>
+                                        <input id="s_passing" name="s_passing" type="checkbox" oninput="onAnyChange()">
+                                    </div>
+                                    <div class="col">
+                                        <label for="s_strength">S</label>
+                                        <input id="s_strength" name="s_strength" type="checkbox" oninput="onAnyChange()">
+                                    </div>
+                                </div>
+                                <div class="row mt-2">
+                                    <div class="form-group">
+                                        <label for="cardText">Skills & Traits</label>
+                                        <textarea id="cardText" name="cardText" class="form-control" rows="3" oninput="onAnyChange()">Body Text</textarea>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="accordion-item">
+                        <h2 id="Player_Image_Titre" class="accordion-header">
+                            <button
+                                class="accordion-button"
+                                type="button"
+                                data-bs-toggle="collapse"
+                                data-bs-target="#Player_Image_Contenu"
+                                aria-expanded="true"
+                                aria-controls="Player_Image_Contenu"
+                            >Image</button>
+                        </h2>
+                        <div id="Player_Image_Contenu" class="accordion-collapse collapse" aria-labelledby="Player_Image_Titre" data-bs-parent="#MenuPrincipal">
+                            <div class="accordion-body">
+                                <div class="row">
+                                    <div class="form-group">
+                                        <label for="imageSelect">Load image</label>
+                                        <input id="imageSelect" class="form-control-file" type="file" oninput="onFighterImageUpload()">
+                                    </div>
+                                    <input id="fighterImageUrl" name="fighterImageUrl" type="hidden" value="">
+                                </div>
+                                <div class="row mt-2">
+                                    <div class="col">
+                                        <label for="imageOffsetX">X offset (&#8596;)</label>
+                                        <input id="imageOffsetX" class="form-control" type="number" value="0" oninput="onAnyChange()">
+                                    </div>
+                                    <div class="col">
+                                        <label for="imageOffsetY">Y offset (&#8597;)</label>
+                                        <input id="imageOffsetY" class="form-control" type="number" value="0" oninput="onAnyChange()">
+                                    </div>
+                                </div>
+                                <div class="row mt-2">
+                                    <div class="col">
+                                        <label for="imageScalePercent">Scale (%)</label>
+                                        <input id="imageScalePercent" class="form-control" type="number" min="0" max="300" value="100" oninput="onAnyChange()">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="accordion-item">
+                        <h2 id="Import_Titre" class="accordion-header">
+                            <button
+                                class="accordion-button"
+                                type="button"
+                                data-bs-toggle="collapse"
+                                data-bs-target="#Import_Contenu"
+                                aria-expanded="true"
+                                aria-controls="Import_Contenu"
+                            >Import/Export</button>
+                        </h2>
+                        <div id="Import_Contenu" class="accordion-collapse collapse" aria-labelledby="Import_Titre" data-bs-parent="#MenuPrincipal">
+                            <div class="accordion-body">
+                                <div class="form-group form-check">
+                                    <input id="removeBorder" class="form-check-input" type="checkbox" onchange="onAnyChange()">
+                                    <label class="form-check-label" for="removeBorder">Remove border to add bleed area for printing</label>
+                                </div>
+                                <div class="mt-4">
+                                    <button id="saveCanvasButton" class="btn btn-success" type="submit" onclick="saveCardAsImage()">Save card as image</button>
+                                </div>
+                                <div class="mt-4">
+                                    <button id="saveButton" class="btn btn-success" type="submit" onclick="onSaveClicked()">Save card as file</button>
+                                </div>
+                                <div class="row mt-4">
+                                    <label for="loadbutton">Load card file</label>
+                                    <div class="col">
+                                        <input id="loadbutton" class="form-control-file" type="file" oninput="fileChange(this.files[0])">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="mt-4">
+                    <button id="clearCacheButton" class="btn btn-danger" type="submit" onclick="onClearCache()">Reset all</button>
+                </div>
+            </div>
+            <div class="mt-3"><br></div>
+        </div>
     </div>
-
-    <script src="assets/vendors/jquery.js"></script>
-    <script src="assets/vendors/popper.min.js"></script>
-    <script src="assets/vendors/bootstrap.min.js"></script>
+    
+    <script src="node_modules/jquery/dist/jquery.min.js"></script>
+    <script src="node_modules/@popperjs/core/dist/umd/popper.min.js"></script>
+    <script src="node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
+    
     <script src="assets/js/card.js"></script>
 
 </body>

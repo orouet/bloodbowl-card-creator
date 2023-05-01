@@ -1,4 +1,12 @@
-writeValue = function (ctx, value, pos) {
+window.onload = function () {
+    //window.localStorage.clear();
+    var fighterData = loadLatestFighterData();
+    writeControls(fighterData);
+    refreshSaveSlots();
+}
+
+
+function writeValue(ctx, value, pos) {
     var scale = getScalingFactor(getCanvas(), getBackgroundImage());
     pos = { x: pos.x / scale.x, y: pos.y / scale.y };
 
@@ -7,6 +15,7 @@ writeValue = function (ctx, value, pos) {
     ctx.fillText(value, pos.x, pos.y);
     ctx.restore();
 }
+
 
 function printAtWordWrap(context, text, x, y, lineHeight, fitWidth) {
 
@@ -44,8 +53,6 @@ function printAtWordWrap(context, text, x, y, lineHeight, fitWidth) {
     }
 
 }
-
-
 
 
 function splitWordWrap(context, text, fitWidth) {
@@ -110,51 +117,60 @@ function printWithMarkup(context, text_array, x, y, lineHeight) {
 }
 
 
-getScalingFactor = function (canvas, warcryCardOne) {
+function getScalingFactor(canvas, warcryCardOne) {
     return {
         x: canvas.width / warcryCardOne.width,
         y: canvas.height / warcryCardOne.height
     };
 }
 
-getCanvas = function () {
+
+function getCanvas() {
     return document.getElementById("canvas");
 }
 
-getContext = function () {
+
+function getContext() {
     return getCanvas().getContext("2d");
 }
 
-getBackgroundImage = function () {
+
+function getBackgroundImage() {
     return document.getElementById('bg1');
 }
 
-drawBackground = function () {
+
+function drawBackground() {
     getContext().drawImage(
         getBackgroundImage(), 0, 0, getCanvas().width, getCanvas().height);
 }
 
-scalePixelPosition = function (pixelPosition) {
+
+function scalePixelPosition(pixelPosition) {
     var scalingFactor = getScalingFactor(getCanvas(), getBackgroundImage());
     var scaledPosition = { x: pixelPosition.x * scalingFactor.x, y: pixelPosition.y * scalingFactor.y };
     return scaledPosition;
 }
 
-writeScaled = function (value, pixelPos) {
+
+function writeScaled(value, pixelPos) {
     var scaledPos = scalePixelPosition(pixelPos);
     writeValue(getContext(), value, scaledPos);
 }
 
-drawCardElementFromInput = function (inputElement, pixelPosition) {
+
+function drawCardElementFromInput(inputElement, pixelPosition) {
     var value = inputElement.value;
     writeScaled(value, pixelPosition);
 }
 
-drawCardElementFromInputId = function (inputId, pixelPosition) {
+
+function drawCardElementFromInputId(inputId, pixelPosition) {
     drawCardElementFromInput(document.getElementById(inputId), pixelPosition);
 }
 
-drawCardName = function (value) {
+
+function drawCardName(value) {
 
     if(value.length < 18){
         getContext().font = 'italic 70px brothers-regular';
@@ -172,7 +188,8 @@ drawCardName = function (value) {
     getContext().rotate(+6 * Math.PI / 180);
 }
 
-drawTeamName = function (value) {
+
+function drawTeamName(value) {
     getContext().font = 'italic 40px brothers-regular';
     getContext().fillStyle = 'black';
     getContext().textAlign = "left";
@@ -184,7 +201,8 @@ drawTeamName = function (value) {
     getContext().rotate(+6 * Math.PI / 180);
 }
 
-drawFooter = function (value) {
+
+function drawFooter(value) {
     getContext().font = '30px brothers-regular';
     getContext().fillStyle = 'white';
     getContext().textAlign = "left";
@@ -192,7 +210,8 @@ drawFooter = function (value) {
     writeScaled(value, { x: 90, y: 990 });
 }
 
-drawPositionName = function (value) {
+
+function drawPositionName(value) {
     getContext().font = '50px brothers-regular';
     getContext().fillStyle = 'white';
     getContext().textAlign = "center";
@@ -200,7 +219,8 @@ drawPositionName = function (value) {
     writeScaled(value, { x: 480, y: 1010 });
 }
 
-drawCardText = function (value) {
+
+function drawCardText(value) {
 
     getContext().font = '36px franklin-gothic-book';
     getContext().fillStyle = 'black';
@@ -222,7 +242,8 @@ drawCardText = function (value) {
     printWithMarkup(getContext(), text_array, 265, 730, lineHeight);
 }
 
-drawDevelopment = function (primary, secondary) {
+
+function drawDevelopment(primary, secondary) {
 
     getContext().font = 'bold 26px franklin-gothic-book';
     getContext().fillStyle = 'black';
@@ -243,9 +264,11 @@ function getLabel(element) {
     return $(element).prop("labels")[0];
 }
 
+
 function getImage(element) {
     return $(element).find("img")[0];
 }
+
 
 function getSelectedRunemark(radioDiv) {
     var checked = $(radioDiv).find('input:checked');
@@ -292,7 +315,6 @@ function setSelectedRunemark(radioDiv, runemark, radioGroupName, bgColor) {
 }
 
 
-
 function drawImage(scaledPosition, scaledSize, image) {
     if (image != null) {
         if (image.complete) {
@@ -303,6 +325,7 @@ function drawImage(scaledPosition, scaledSize, image) {
         }
     }
 }
+
 
 function drawImageSrc(scaledPosition, scaledSize, imageSrc) {
     if (imageSrc != null) {
@@ -329,15 +352,18 @@ function drawModel(imageUrl, imageProps) {
     }
 }
 
+
 function getName() {
     //var textInput = $("#saveNameInput")[0];
     return "BloodBowl_Card";
 }
 
+
 function setName(name) {
     //var textInput = $("#saveNameInput")[0];
     //textInput.value = name;
 }
+
 
 function getModelImage() {
     var imageSelect = $("#imageSelect")[0];
@@ -348,6 +374,7 @@ function getModelImage() {
 
     return null;
 }
+
 
 function setModelImage(image) {
     console.log("setModelImage:" + image);
@@ -362,6 +389,7 @@ function setModelImage(image) {
     // }
 }
 
+
 function getDefaultModelImageProperties() {
     return {
         offsetX: 0,
@@ -370,6 +398,7 @@ function getDefaultModelImageProperties() {
     };
 }
 
+
 function getModelImageProperties() {
     return {
         offsetX: $("#imageOffsetX")[0].valueAsNumber,
@@ -377,6 +406,7 @@ function getModelImageProperties() {
         scalePercent: $("#imageScalePercent")[0].valueAsNumber
     };
 }
+
 
 function setModelImageProperties(modelImageProperties) {
     $("#imageOffsetX")[0].value = modelImageProperties.offsetX;
@@ -414,6 +444,7 @@ function readControls() {
 
     return data;
 }
+
 
 function drawCardFrame(fighterData){
     getContext().drawImage(document.getElementById('frame'), 0, 0, getCanvas().width, getCanvas().height);
@@ -503,7 +534,8 @@ function drawCardFrame(fighterData){
 
 }
 
-render = function (fighterData) {
+
+function render(fighterData) {
     console.log("Render:");
     console.log(fighterData);
     // First the textured background
@@ -530,6 +562,7 @@ render = function (fighterData) {
     
 }
 
+
 function drawNumber(num,x, y, plus){
 
     if(num<1 || num>11 ) {
@@ -555,6 +588,7 @@ function drawNumber(num,x, y, plus){
         getContext().drawImage(document.getElementById('sf+'), x+width, y, 39, 70);
     }
 }
+
 
 async function writeControls(fighterData) {
 
@@ -607,12 +641,14 @@ async function writeControls(fighterData) {
 
 function defaultFighterData() {
     var fighterData = new Object;
+    
     fighterData.name = "BloodBowl_Card";
     fighterData.cardName = "Card Name";
     fighterData.teamName = "Team Name";
     fighterData.footer = "100,000";
-    fighterData.positionName = " ";
+    fighterData.positionName = "Linemen";
     fighterData.cardText = "Body Text";
+    
     fighterData.imageUrl = null;
     fighterData.imageProperties = getDefaultModelImageProperties();
     
@@ -621,13 +657,16 @@ function defaultFighterData() {
     fighterData.ag = 3;
     fighterData.pa = 3;
     fighterData.av = 9;
+    
     fighterData.imageUrl = null;
     fighterData.imageProperties = getDefaultModelImageProperties();
+    
     fighterData.p_agility = false;
     fighterData.p_general = false;
     fighterData.p_passing = false;
     fighterData.p_mutations = false;
     fighterData.p_strength = false;
+    
     fighterData.s_agility = false;
     fighterData.s_general = false;
     fighterData.s_passing = false;
@@ -637,9 +676,11 @@ function defaultFighterData() {
     return fighterData;
 }
 
+
 function saveFighterDataMap(newMap) {
     window.localStorage.setItem("fighterDataMap", JSON.stringify(newMap));
 }
+
 
 function loadFighterDataMap() {
     var storage = window.localStorage.getItem("fighterDataMap");
@@ -653,27 +694,28 @@ function loadFighterDataMap() {
     return map;
 }
 
+
 function loadLatestFighterData() {
     var latestCardName = window.localStorage.getItem("latestCardName");
     if (latestCardName == null) {
         latestCardName = "BloodBowl_Card";
     }
-
+    
     console.log("Loading '" + latestCardName + "'...");
-
+    
     var data = loadFighterData(latestCardName);
-
+    
     if (data) {
         console.log("Loaded data:");
         console.log(data);
-    }
-    else {
+    } else {
         console.log("Failed to load data, loading defaults.");
         data = defaultFighterData();
     }
-
+    
     return data;
 }
+
 
 function saveLatestFighterData() {
     var fighterData = readControls();
@@ -684,6 +726,7 @@ function saveLatestFighterData() {
     window.localStorage.setItem("latestCardName", fighterData.name);
     //saveFighterData(fighterData);
 }
+
 
 function loadFighterData(fighterDataName) {
     if (!fighterDataName) {
@@ -698,6 +741,7 @@ function loadFighterData(fighterDataName) {
     return null;
 }
 
+
 function getBase64Image(img) {
     var canvas = document.createElement("canvas");
     canvas.width = img.width;
@@ -711,12 +755,14 @@ function getBase64Image(img) {
     return dataURL;
 }
 
+
 function onload2promise(obj) {
     return new Promise((resolve, reject) => {
         obj.onload = () => resolve(obj);
         obj.onerror = reject;
     });
 }
+
 
 async function getBase64ImgFromUrl(imgUrl) {
     let img = new Image();
@@ -727,6 +773,7 @@ async function getBase64ImgFromUrl(imgUrl) {
     return imgData;
 }
 
+
 async function handleImageUrlFromDisk(imageUrl) {
     if (imageUrl &&
         imageUrl.startsWith("blob:")) {
@@ -736,6 +783,7 @@ async function handleImageUrlFromDisk(imageUrl) {
 
     return imageUrl;
 }
+
 
 async function saveFighterData(fighterData) {
     var finishSaving = function () {
@@ -753,32 +801,27 @@ async function saveFighterData(fighterData) {
     }
 }
 
+
 function getLatestFighterDataName() {
     return "latestFighterData";
 }
 
-window.onload = function () {
-    //window.localStorage.clear();
-    var fighterData = loadLatestFighterData();
-    writeControls(fighterData);
-    refreshSaveSlots();
-}
 
-onAnyChange = function () {
+function onAnyChange() {
     var fighterData = readControls();
     render(fighterData);
     saveLatestFighterData();
 }
 
 
-
-onWeaponRunemarkFileSelect = function (input, weaponName) {
+function onWeaponRunemarkFileSelect(input, weaponName) {
     var grid = $(input.parentNode).find("#weaponRunemarkSelect")[0];
 
     for (i = 0; i < input.files.length; i++) {
         addToImageRadioSelector(URL.createObjectURL(input.files[i]), grid, weaponName, "white");
     }
 }
+
 
 function addToImageCheckboxSelector(imgSrc, grid, bgColor) {
     var div = document.createElement('div');
@@ -793,16 +836,19 @@ function addToImageCheckboxSelector(imgSrc, grid, bgColor) {
     return div;
 }
 
+
 function onClearCache() {
     window.localStorage.clear();
     location.reload();
     return false;
 }
 
+
 function onResetToDefault() {
     var fighterData = defaultFighterData();
     writeControls(fighterData);
 }
+
 
 function refreshSaveSlots() {
     // Remove all
@@ -825,8 +871,8 @@ function refreshSaveSlots() {
 
 async function onSaveClicked() {
     data = readControls();
-    // temp null while I work out image saving
     console.log(data);
+    
     data.base64Image = await handleImageUrlFromDisk(data.imageUrl)
 
     // need to be explicit due to sub arrays
@@ -836,25 +882,37 @@ async function onSaveClicked() {
     'p_agility', 'p_general', 'p_mutations', 'p_passing', 'p_strength',
     's_agility', 's_general', 's_mutations', 's_passing', 's_strength', 
     'teamName','base64Image'], 4);
-
+    
+    var fileName = "bloodbowl_card_" + data.cardName.replace(/ /g, "_") + ".json";
+    console.log(fileName);
+    
     var dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(exportObj);
     var downloadAnchorNode = document.createElement('a');
     downloadAnchorNode.setAttribute("href", dataStr);
-    downloadAnchorNode.setAttribute("download", "bloodbowl_card_" + data.cardName.replace(/ /g, "_") + ".json");
+    downloadAnchorNode.setAttribute("download", fileName);
     document.body.appendChild(downloadAnchorNode); // required for firefox
     downloadAnchorNode.click();
     downloadAnchorNode.remove();
 }
 
+
 function saveCardAsImage() {
-    var element = document.createElement('a');
     data = readControls();
-    element.setAttribute('href', document.getElementById('canvas').toDataURL('image/png'));
-    element.setAttribute('download', "bloodbowl_card_" + data.cardName + ".png");
-    element.style.display = 'none';
-    document.body.appendChild(element);
-    element.click();
-    document.body.removeChild(element);
+    console.log(data);
+    
+    var Canvas = document.getElementById('canvas');
+    // var dataStr = Canvas.toDataURL('image/png').replace("image/png", "image/octet-stream");
+    
+    var fileName = "bloodbowl_card_" + data.cardName + ".png";
+    console.log(fileName);
+    
+    var dataStr = Canvas.toDataURL();
+    var Anchor = document.createElement('a');
+    Anchor.setAttribute('href', dataStr);
+    Anchor.setAttribute('download', fileName);
+    document.body.appendChild(Anchor); // required for firefox
+    Anchor.click();
+    Anchor.remove();
 }
 
 $(document).ready(function () {
@@ -897,7 +955,7 @@ async function fileChange(file) {
 
 }
 
-onFighterImageUpload = function () {
+function onFighterImageUpload() {
     image = getModelImage();
     setModelImage(image);
     var fighterData = readControls();
