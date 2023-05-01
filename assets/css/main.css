@@ -1,5 +1,5 @@
-/* @import url("../vendors/bootswatch-darkly.min.css") (prefers-color-scheme: dark); */
-/* @import url("../vendors/bootswatch-flatly.min.css") (prefers-color-scheme: light); */
+@import url("../../node_modules/bootswatch/dist/darkly/bootstrap.css") (prefers-color-scheme: dark);
+@import url("../../node_modules/bootswatch/dist/flatly/bootstrap.css") (prefers-color-scheme: light);
 
 ::-moz-selection {
     /* Code for Firefox */
