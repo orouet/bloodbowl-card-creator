@@ -2,19 +2,6 @@
 @import url("../../node_modules/bootswatch/dist/flatly/bootstrap.css") (prefers-color-scheme: light);
 
 @font-face {
-    font-family: "rodchenkoctt";
-    font-style: normal;
-    font-weight: normal;
-    /* src: url("../fonts/rodchenkoctt.eot");
-    src: url("../fonts/rodchenkoctt.eot?#iefix") format("embedded-opentype"),
-        url("../fonts/rodchenkoctt.woff2") format("woff2"),
-        url("../fonts/rodchenkoctt.woff") format("woff"),
-        url("../fonts/rodchenkoctt.ttf") format("truetype"),
-        url("../fonts/rodchenkoctt.svg#rodchenkoctt") format("svg"); */
-    src: url("../fonts/rodchenkoctt.woff2") format("woff2");
-}
-
-@font-face {
     font-family: "bank-gothic";
     font-style: normal;
     font-weight: normal;
