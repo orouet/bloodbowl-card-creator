@@ -1,0 +1,30 @@
+function defaultPlayerData() {
+    var PlayerData = new Object;
+    // console.log(translator.getStr("cardName"));
+    PlayerData.name = translator.getStr("cardName");
+    PlayerData.cardName = translator.getStr("playerName");
+    PlayerData.teamName = translator.getStr("teamName");
+    PlayerData.footer = "100,000";
+    PlayerData.positionName = translator.getStr("positionName");
+    PlayerData.cardText = translator.getStr("cardText");
+    PlayerData.imageUrl = null;
+    PlayerData.imageProperties = getDefaultModelImageProperties();
+    PlayerData.ma = 4;
+    PlayerData.st = 4;
+    PlayerData.ag = 3;
+    PlayerData.pa = 3;
+    PlayerData.av = 9;
+    PlayerData.imageUrl = null;
+    PlayerData.imageProperties = getDefaultModelImageProperties();
+    PlayerData.p_agility = false;
+    PlayerData.p_general = false;
+    PlayerData.p_passing = false;
+    PlayerData.p_mutations = false;
+    PlayerData.p_strength = false;
+    PlayerData.s_agility = false;
+    PlayerData.s_general = false;
+    PlayerData.s_passing = false;
+    PlayerData.s_mutations = false;
+    PlayerData.s_strength = false;
+    return PlayerData;
+}

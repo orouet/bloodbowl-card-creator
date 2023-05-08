@@ -246,7 +246,7 @@
                                 <div class="row">
                                     <div class="form-group">
                                         <label for="imageSelect">Load image</label>
-                                        <input id="imageSelect" class="form-control-file" type="file" oninput="onFighterImageUpload()">
+                                        <input id="imageSelect" class="form-control-file" type="file" oninput="onPlayerImageUpload()">
                                     </div>
                                     <input id="fighterImageUrl" name="fighterImageUrl" type="hidden" value="">
                                 </div>
@@ -330,7 +330,21 @@
     <script src="node_modules/@popperjs/core/dist/umd/popper.min.js"></script>
     <script src="node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
     
+    <script src="assets/js/languages.js"></script>
+    <script src="assets/js/player.js"></script>
+    <script src="assets/js/canvas.js"></script>
     <script src="assets/js/card.js"></script>
+    <script src="assets/js/json.js"></script>
+    <script src="assets/js/occ.js"></script>
+
+    <script type="text/javascript">
+        window.onload = function () {
+            //window.localStorage.clear();
+            var PlayerData = loadLatestPlayerData();
+            writeControls(PlayerData);
+            refreshSaveSlots();
+        }
+    </script>
 
 </body>
 
