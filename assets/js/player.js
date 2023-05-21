@@ -1,21 +1,22 @@
 function defaultPlayerData() {
     var PlayerData = new Object;
-    // console.log(translator.getStr("cardName"));
-    PlayerData.name = translator.getStr("cardName");
-    PlayerData.cardName = translator.getStr("playerName");
+    // console.log(translator.getStr("playerName"));
+    // Description
+    PlayerData.name = translator.getStr("playerName");
+    PlayerData.playerName = translator.getStr("playerName");
     PlayerData.teamName = translator.getStr("teamName");
-    PlayerData.footer = "100,000";
     PlayerData.positionName = translator.getStr("positionName");
-    PlayerData.cardText = translator.getStr("cardText");
+    PlayerData.GP = "50 000";
+    // Photo
     PlayerData.imageUrl = null;
     PlayerData.imageProperties = getDefaultModelImageProperties();
+    // Stats
     PlayerData.ma = 6;
     PlayerData.st = 3;
     PlayerData.ag = 3;
     PlayerData.pa = 4;
     PlayerData.av = 9;
-    PlayerData.imageUrl = null;
-    PlayerData.imageProperties = getDefaultModelImageProperties();
+    // Skills
     PlayerData.p_agility = false;
     PlayerData.p_general = true;
     PlayerData.p_passing = false;
@@ -26,5 +27,7 @@ function defaultPlayerData() {
     PlayerData.s_passing = false;
     PlayerData.s_mutations = false;
     PlayerData.s_strength = false;
+    // Text
+    PlayerData.cardText = translator.getStr("cardText");
     return PlayerData;
 }

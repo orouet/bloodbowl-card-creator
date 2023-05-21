@@ -48,70 +48,46 @@ function drawCardFrame(PlayerData){
     if (!document.getElementById("removeBorder").checked) {
         getContext().drawImage(document.getElementById('border'), 0, 0, getCanvas().width, getCanvas().height);
     }
-    drawCardName(PlayerData.cardName);
+    drawCardPlayerName(PlayerData.playerName);
     drawCardTeamName(PlayerData.teamName);
-    drawCardGP(PlayerData.footer);
+    drawCardGP(PlayerData.GP);
     drawCardPosition(PlayerData.positionName);
     drawCardText(PlayerData.cardText);
-    primary = "";
+    let primaries = [];
+    let secondaries = [];
     if (PlayerData.p_agility) {
-        primary = primary + "Agility";
-    }
-    if (primary!="" && PlayerData.p_general) {
-        primary = primary + ", ";
+        primaries.push(translator.getStr("agility"));
     }
     if (PlayerData.p_general) {
-        primary = primary + "General";
-    }
-    if (primary!="" && PlayerData.p_mutations) {
-        primary = primary + ", ";
+        primaries.push(translator.getStr("general"));
     }
     if (PlayerData.p_mutations) {
-        primary = primary + "Mutations";
-    }
-    if (primary!="" && PlayerData.p_passing) {
-        primary = primary + ", ";
+        primaries.push(translator.getStr("mutations"));
     }
     if (PlayerData.p_passing) {
-        primary = primary + "Passing";
-    }
-    if (primary!="" && PlayerData.p_strength) {
-        primary = primary + ", ";
+        primaries.push(translator.getStr("passing"));
     }
     if (PlayerData.p_strength) {
-        primary = primary + "Strength";
+        primaries.push(translator.getStr("strength"));
     }
-    secondary = "";
     if (PlayerData.s_agility) {
-        secondary = secondary + "Agility";
-    }
-    if (secondary!="" && PlayerData.s_general) {
-        secondary = secondary + ", ";
+        secondaries.push(translator.getStr("agility"));
     }
     if (PlayerData.s_general) {
-        secondary = secondary + "General";
-    }
-    if (secondary!="" && PlayerData.s_mutations) {
-        secondary = secondary + ", ";
+        secondaries.push(translator.getStr("general"));
     }
     if (PlayerData.s_mutations) {
-        secondary = secondary + "Mutations";
-    }
-    if (secondary!="" && PlayerData.s_passing) {
-        secondary = secondary + ", ";
+        secondaries.push(translator.getStr("mutations"));
     }
     if (PlayerData.s_passing) {
-        secondary = secondary + "Passing";
-    }
-    if (secondary!="" && PlayerData.s_strength) {
-        secondary = secondary + ", ";
+        secondaries.push(translator.getStr("passing"));
     }
     if (PlayerData.s_strength) {
-        secondary = secondary + "Strength";
+        secondaries.push(translator.getStr("strength"));
     }
-    drawCardSkills(primary, secondary);
+    drawCardSkills(primaries, secondaries);
     // MA
-     drawNumber(PlayerData.ma, 130, 255, false);
+    drawNumber(PlayerData.ma, 130, 255, false);
     // ST
     drawNumber(PlayerData.st, 130, 395, false);
     // AG
@@ -132,7 +108,7 @@ function drawCardGP(value) {
 }
 
 
-function drawCardName(value) {
+function drawCardPlayerName(value) {
     if (value.length < 18) {
         getContext().font = 'italic 70px brothers-regular';
     } else {
@@ -170,17 +146,58 @@ function drawCardPosition(value) {
 }
 
 
-function drawCardSkills(primary, secondary) {
-    getContext().font = 'bold 26px franklin-gothic-book';
+function drawCardSkills(primaries, secondaries) {
+    let primaryTitle = "";
+    let primaryText = "";
+    let secondaryTitle = "";
+    let secondaryText = "";
+    primaryText = primaries.join(",");
+    secondaryText = secondaries.join(",");
     getContext().fillStyle = 'black';
     getContext().textAlign = "left";
     getContext().textBaseline = "middle";
-    x = 265;
-    writeScaled("Primary: ", { x: x, y: 890 });
-    writeScaled("Secondary: ", { x: x, y: 930 });
-    getContext().font = '30px franklin-gothic-book';
-    writeScaled(primary, { x: x+95, y: 890 });
-    writeScaled(secondary, { x: x+125, y: 930 });
+    let x = 265;
+    let y = 890;
+    // Primaries
+    if (primaries.length < 2 ) {
+        primaryTitle = translator.getStr("skillsPrimary");
+    } else {
+        primaryTitle = translator.getStr("skillsPrimaries");
+    }
+    getContext().font = 'bold 26px franklin-gothic-book';
+    writeScaled(primaryTitle, { x: x, y: y });
+    let primaryTitleW = getContext().measureText(primaryTitle).width;
+    console.log(primaryTitleW)
+    if (primaries.length == 0) {
+        primaryText = translator.getStr("skillsMin1");
+    }
+    if (primaries.length > 3) {
+        primaryText = translator.getStr("skillsMax3");
+    }
+    getContext().font = '26px franklin-gothic-book';
+    writeScaled(primaryText, { x: x + primaryTitleW, y: 890 });
+    let primaryTextW = getContext().measureText(primaryText).width;
+    console.log(primaryTextW)
+    // secondaries
+    if (secondaries.length < 2) {
+        secondaryTitle = translator.getStr("skillsSecondary");
+    } else {
+        secondaryTitle = translator.getStr("skillsSecondaries");
+    }
+    getContext().font = 'bold 26px franklin-gothic-book';
+    writeScaled(secondaryTitle, { x: x, y: 930 });
+    let secondaryTitleW = getContext().measureText(secondaryTitle).width;
+    console.log(secondaryTitleW)
+    if (secondaries.length == 0) {
+        secondaryText = translator.getStr("skillsMin1");
+    }
+    if (secondaries.length > 3) {
+        secondaryText = translator.getStr("skillsMax3");
+    }
+    getContext().font = '26px franklin-gothic-book';
+    writeScaled(secondaryText, { x: x + secondaryTitleW, y: 930 });
+    let secondaryTextW = getContext().measureText(secondaryText).width;
+    console.log(secondaryTextW)
 }
 
 
@@ -207,7 +224,7 @@ function drawCardTeamName(value) {
     getContext().textAlign = "left";
     getContext().textBaseline = "middle";
     getContext().rotate(-6 * Math.PI / 180);
-    writeScaled(value, { x: 60 +4, y: 125+4 });
+    writeScaled(value, { x: 60 + 4, y: 125+4 });
     getContext().fillStyle = 'white';
     writeScaled(value, { x: 60, y: 125 });
     getContext().rotate(+6 * Math.PI / 180);
@@ -249,7 +266,7 @@ function drawNumber(num,x, y, plus) {
     }
     getContext().drawImage(document.getElementById(elementId), x, y, width, 70);
     if (plus) {
-        getContext().drawImage(document.getElementById('sf+'), x+width, y, 39, 70);
+        getContext().drawImage(document.getElementById('sf+'), x + width, y, 39, 70);
     }
 }
 
@@ -285,7 +302,7 @@ function getDefaultModelImageProperties() {
 
 
 function getFighterImageUrl() {
-    var imageSelect = $("#fighterImageUrl")[0].value;
+    var imageSelect = $("#playerImageURL")[0].value;
     // if (imageSelect.files.length > 0) {
     //return URL.createObjectURL(imageSelect.files[0]);
     // }
@@ -498,7 +515,7 @@ function savePlayerDataMap(newMap) {
 
 function setModelImage(image) {
     console.log("setModelImage:" + image);
-    $("#fighterImageUrl")[0].value = image;
+    $("#playerImageURL")[0].value = image;
     //  if (image != null) {
     // TODO: Not sure how to do this. It might not even be possible! Leave it for now...
     //    imageSelect.value = image;
@@ -519,41 +536,4 @@ function setModelImageProperties(modelImageProperties) {
 function setName(name) {
     //var textInput = $("#saveNameInput")[0];
     //textInput.value = name;
-}
-
-
-function splitWordWrap(context, text, fitWidth) {
-    // this was modified from the print version to only return the text array
-    return_array = [];
-    var lines = text.split('\n');
-    lineNum = 0;
-    for (var i = 0; i < lines.length; i++) {
-        fitWidth = fitWidth || 0;
-        if (fitWidth <= 0) {
-            return_array.push(lines[i]);
-            lineNum ++;
-        }
-        var words = lines[i].split(' ');
-        var idx = 1;
-        while (words.length > 0 && idx <= words.length) {
-            var str = words.slice(0, idx).join(' ');
-            var w = context.measureText(str).width;
-            if (w > fitWidth) {
-                if (idx == 1) {
-                    idx = 2;
-                }
-                return_array.push(words.slice(0, idx - 1).join(' '));
-                lineNum ++;
-                words = words.splice(idx - 1);
-                idx = 1;
-            } else {
-                idx ++;
-            }
-        }
-        if (idx > 0) {
-            return_array.push(words.join(' '));
-            lineNum ++;
-        }
-    }
-    return return_array;
 }

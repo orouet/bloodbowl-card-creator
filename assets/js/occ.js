@@ -39,9 +39,9 @@ async function onSaveClicked() {
         'offsetX',
         'offsetY',
         'scalePercent', 
-        'cardName',
+        'playerName',
         'cardText',
-        'footer',
+        'GP',
         'positionName',
         'ma',
         'st',
@@ -62,7 +62,7 @@ async function onSaveClicked() {
         'base64Image'
     ];
     var exportObj = JSON.stringify(data, attributes, 4);
-    var fileName = "bloodbowl_card_" + data.cardName.replace(/ /g, "_") + ".json";
+    var fileName = "bloodbowl_card_" + data.playerName.replace(/ /g, "_") + ".json";
     console.log(fileName);
     var dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(exportObj);
     var downloadAnchorNode = document.createElement('a');
@@ -79,9 +79,9 @@ function readControls() {
     data.name = getName();
     data.imageUrl = getFighterImageUrl();
     data.imageProperties = getModelImageProperties();
-    data.cardName = document.getElementById("cardName").value;
+    data.playerName = document.getElementById("playerName").value;
     data.teamName = document.getElementById("teamName").value;
-    data.footer = document.getElementById("footer").value;
+    data.GP = document.getElementById("GP").value;
     data.cardText = document.getElementById("cardText").value;
     data.positionName = document.getElementById("positionName").value;
     data.ma = document.getElementById("ma").value;
@@ -125,7 +125,7 @@ function saveCardAsImage() {
     console.log(data);
     var Canvas = document.getElementById('canvas');
     // var dataStr = Canvas.toDataURL('image/png').replace("image/png", "image/octet-stream");
-    var fileName = "bloodbowl_card_" + data.cardName + ".png";
+    var fileName = "bloodbowl_card_" + data.playerName + ".png";
     console.log(fileName);
     var dataStr = Canvas.toDataURL();
     var Anchor = document.createElement('a');
@@ -176,9 +176,9 @@ async function writeControls(PlayerData) {
     setName(PlayerData.name);
     setModelImage(PlayerData.imageUrl);
     setModelImageProperties(PlayerData.imageProperties);
-    $("#cardName")[0].value = PlayerData.cardName;
+    $("#playerName")[0].value = PlayerData.playerName;
     $("#teamName")[0].value = PlayerData.teamName;
-    $("#footer")[0].value = PlayerData.footer;
+    $("#GP")[0].value = PlayerData.GP;
     $("#positionName")[0].value = PlayerData.positionName;
     $("#ma")[0].value = PlayerData.ma;
     $("#st")[0].value = PlayerData.st;

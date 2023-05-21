@@ -1,19 +1,41 @@
-var Dictionaries = {
+const Dictionaries = {
     en: {
         Save: "Save",
-        cardName: "Default Card Name",
+        playerName: "Default Card Name",
         teamName: "Default Team Name",
         playerName: "Default Player Name",
         positionName: "Default Position Name",
-        cardText: "Default Card Text."
+        cardText: "Default Card Text.",
+        skillsPrimary: "Primary:",
+        skillsSecondary: "Secondary:",
+        skillsPrimaries: "Primaries:",
+        skillsSecondaries: "Secondaries:",
+        agility: "agility",
+        general: "general",
+        mutations: "mutations",
+        passing: "passing",
+        strength: "strength",
+        skillsMin1: "Min 1 skill",
+        skillsMax3: "Max 3 skills",
     },
     fr: {
         Save:"Enregistrer",
-        cardName: "BBC",
+        playerName: "BBC",
         teamName: "Bloomy ChouX",
         playerName: "Chou Fleur",
         positionName: "Human Linemen",
-        cardText: "Néant."
+        cardText: "Néant.",
+        skillsPrimary: "Principale : ",
+        skillsSecondary: "Secondaire : ",
+        skillsPrimaries: "Principales : ",
+        skillsSecondaries: "Secondaires : ",
+        agility: "agilité",
+        general: "général",
+        mutations: "mutations",
+        passing: "passe",
+        strength: "force",
+        skillsMin1: "Mininum 1 compétence",
+        skillsMax3: "Maximum 3 compétences",
     }
 };
 
