@@ -1,19 +1,19 @@
 var Dictionaries = {
     en: {
         Save: "Save",
-        cardName: "BloodBowlCard",
-        teamName: "Team Name",
-        playerName: "Card Name",
-        positionName: "Linemen",
-        cardText: "Body Text."
+        cardName: "Default Card Name",
+        teamName: "Default Team Name",
+        playerName: "Default Player Name",
+        positionName: "Default Position Name",
+        cardText: "Default Card Text."
     },
     fr: {
         Save:"Enregistrer",
         cardName: "BBC",
-        teamName: "Nom de l'équipe",
-        playerName: "Nom de la carte",
-        positionName: "Trois-quart",
-        cardText: "Liste des skills."
+        teamName: "Bloomy ChouX",
+        playerName: "Chou Fleur",
+        positionName: "Human Linemen",
+        cardText: "Néant."
     }
 };
 
@@ -23,7 +23,10 @@ class Translator {
     constructor(Dictionaries, language) {
         this.Dictionary = false;
         if (Dictionaries.hasOwnProperty(language)) {
+            console.log("Loading dictionnary '" + language + "'");
             this.Dictionary = Dictionaries[language];
+        } else {
+            console.log("Cannot load dictionnary " + language + "'");
         }
         return;
     }
@@ -33,9 +36,11 @@ class Translator {
         } else {
             if (this.Dictionary.hasOwnProperty(str)) {
                 return  this.Dictionary[str];
+            } else {
+                console.log("Cannot find string " + str + " in dictionnary " + language + "'");
+                return str;
             }
         }
     }
 }
 
-var translator = new Translator(Dictionaries, "en");
