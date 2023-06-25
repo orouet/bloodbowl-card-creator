@@ -88,7 +88,7 @@ function drawCardFrame(PlayerData){
     drawCardSkills(primaries, secondaries);
     // MA
     drawNumber(PlayerData.ma, 130, 255, false);
-    drawNumber2(PlayerData.ma, 190, 320, false);
+    //drawNumber2(PlayerData.ma, 190, 320, false);
     // ST
     drawNumber(PlayerData.st, 130, 395, false);
     // AG
