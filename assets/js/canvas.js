@@ -62,13 +62,13 @@ function printAtWordWrap(context, text, x, y, lineHeight, fitWidth) {
 }
 
 
-function printWithMarkup(context, text_array, x1, y1, lineHeight) {
+function printWithMarkup(Context, text_array, x1, y1, lineHeight) {
     // table code style --> font style
     // Text comes in as an array
     // need to split it into lines
     for (line in text_array) {
-        context.font = '36px frutiger-light';
-        context.fillStyle = 'black';
+        Context.font = '36px frutiger-light';
+        Context.fillStyle = 'black';
         if (text_array[line].startsWith("**")) {
             printText = text_array[line].replace("**", '');
             context.font = 'bold 38px frutiger-light';
@@ -78,7 +78,7 @@ function printWithMarkup(context, text_array, x1, y1, lineHeight) {
         }
         y2 = y1 + (line * lineHeight);
         //context.fillText(printText, x1, y2);
-        writeScaled(printText, {x: x1, y: y2});
+        writeScaled(Context, printText, {x: x1, y: y2});
     }
 }
 
@@ -132,12 +132,12 @@ function splitWordWrap(Context, text, fitWidth) {
 }
 
 
-function writeScaled(text, PixelPosition, border = false) {
-    console.log(text)
-    console.log(PixelPosition)
+function writeScaled(Context, text, PixelPosition, border = false) {
+    //console.log(text)
+    //console.log(PixelPosition)
     var ScaledPosition = scalePixelPosition(PixelPosition);
-    console.log(ScaledPosition)
-    writeValue(getContext(), text, ScaledPosition, border);
+    //console.log(ScaledPosition)
+    writeValue(Context, text, ScaledPosition, border);
 }
 
 
@@ -147,7 +147,7 @@ function writeValue(Context, text, ScaledPosition, border = false) {
             x: ScaledPosition.x / ScalingFactor.x,
             y: ScaledPosition.y / ScalingFactor.y
     };
-    console.log(Position)
+    //console.log(Position)
     Context.save();
     Context.scale(ScalingFactor.x, ScalingFactor.y);
     if (border) {
