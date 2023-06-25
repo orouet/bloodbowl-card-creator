@@ -43,6 +43,31 @@ function drawCardElementFromInputId(inputId, pixelPosition) {
 }
 
 
+function drawCharacteristic(number, x1, y1, plus) {
+    Context = getContext()
+    if (number < 1 || number > 11 ) {
+        number = '-';
+        plus = false;
+    } else {
+        text = number
+    }
+    Context.font = '100px brothers-regular';
+    Context.fillStyle = '#0e457d';
+    Context.textAlign = "left";
+    Context.textBaseline = "alphabetic";
+    Context.strokeStyle = 'white';
+    Context.lineWidth = 8;
+    writeScaled(text, { x: x1, y: y1 }, true);
+    if (plus) {
+        Context.font = '60px brothers-regular';
+        Context.lineWidth = 6;
+        writeScaled("+", { x: x1 + 60, y: y1 - 40 }, true);
+    }
+    Context.lineWidth = 0;
+    Context.fillStyle = 'black';
+}
+
+
 function drawCardFrame(PlayerData){
     getContext().drawImage(document.getElementById('frame'), 0, 0, getCanvas().width, getCanvas().height);
     if (!document.getElementById("removeBorder").checked) {
@@ -87,33 +112,39 @@ function drawCardFrame(PlayerData){
     }
     drawCardSkills(primaries, secondaries);
     // MA
-    drawNumber(PlayerData.ma, 130, 255, false);
-    //drawNumber2(PlayerData.ma, 190, 320, false);
+    //drawNumber(PlayerData.ma, 130, 255, false);
+    drawCharacteristic(PlayerData.ma, 120, 320, false);
     // ST
-    drawNumber(PlayerData.st, 130, 395, false);
+    //drawNumber(PlayerData.st, 130, 395, false);
+    drawCharacteristic(PlayerData.st, 120, 460, false);
     // AG
-    drawNumber(PlayerData.ag, 130, 535, true);
+    //drawNumber(PlayerData.ag, 130, 535, true);
+    drawCharacteristic(PlayerData.ag, 120, 590, true);
     // PA
-    drawNumber(PlayerData.pa, 130, 670, true);
+    //drawNumber(PlayerData.pa, 130, 670, true);
+    drawCharacteristic(PlayerData.pa, 120, 732, true);
     // AV
-    drawNumber(PlayerData.av, 130, 805, true);
+    //drawNumber(PlayerData.av, 130, 805, true);
+    drawCharacteristic(PlayerData.av, 120, 870, true);
 }
 
 
 function drawCardGP(value) {
-    getContext().font = '30px brothers-regular';
-    getContext().fillStyle = 'white';
-    getContext().textAlign = "left";
-    getContext().textBaseline = "middle";
-    writeScaled(value, { x: 90, y: 990 });
+    Context = getContext();
+    Context.font = '30px brothers-regular';
+    Context.textAlign = "center";
+    Context.textBaseline = "middle";
+    Context.fillStyle = 'white';
+    writeScaled(value, { x: 150, y: 990 });
 }
 
 
 function drawCardPlayerName(value) {
+    Context = getContext();
     if (value.length < 18) {
-        getContext().font = 'italic 70px brothers-regular';
+        Context.font = 'italic 70px brothers-regular';
     } else {
-        getContext().font = 'italic 50px brothers-regular';
+        Context.font = 'italic 50px brothers-regular';
     }
     var rotation = 6 * Math.PI / 180;
     var Position = {
@@ -124,26 +155,33 @@ function drawCardPlayerName(value) {
         x: 4,
         y: 4
     };
-    getContext().textAlign = "left";
-    getContext().textBaseline = "middle";
-    getContext().rotate(-rotation);
+    Context.textAlign = "left";
+    Context.textBaseline = "middle";
+    Context.lineWidth = 0;
+    Context.rotate(- rotation);
     //
-    getContext().fillStyle = 'black';
+    Context.fillStyle = 'black';
     writeScaled(value, { x: 48 + 4, y: 180 + 4 });
     //
-    getContext().fillStyle = 'white';
+    Context.fillStyle = 'white';
     writeScaled(value, { x: 48, y: 180 });
     //
-    getContext().rotate(+rotation);
+    Context.rotate(+ rotation);
 }
 
 
 function drawCardPosition(value) {
-    getContext().font = '50px brothers-regular';
-    getContext().fillStyle = 'white';
-    getContext().textAlign = "center";
-    getContext().textBaseline = "middle";
-    writeScaled(value, { x: 480, y: 1010 });
+    Position = {
+        x: 480,
+        y: 1010
+    };
+    Context = getContext();
+    Context.font = '50px brothers-regular';
+    Context.textAlign = "center";
+    Context.textBaseline = "middle";
+    Context.fillStyle = 'white';
+    Context.lineWidth = 0;
+    writeScaled(value, Position);
 }
 
 
@@ -154,9 +192,10 @@ function drawCardSkills(primaries, secondaries) {
     let secondaryText = "";
     primaryText = primaries.join(",");
     secondaryText = secondaries.join(",");
-    getContext().fillStyle = 'black';
-    getContext().textAlign = "left";
-    getContext().textBaseline = "middle";
+    Context = getContext();
+    Context.fillStyle = 'black';
+    Context.textAlign = "left";
+    Context.textBaseline = "middle";
     let x = 265;
     let y = 890;
     // Primaries
@@ -165,48 +204,49 @@ function drawCardSkills(primaries, secondaries) {
     } else {
         primaryTitle = translator.getStr("skillsPrimaries");
     }
-    getContext().font = 'bold 26px franklin-gothic-book';
+    Context.font = 'bold 26px franklin-gothic-book';
     writeScaled(primaryTitle, { x: x, y: y });
-    let primaryTitleW = getContext().measureText(primaryTitle).width;
-    console.log(primaryTitleW)
+    let primaryTitleW = Context.measureText(primaryTitle).width;
+    //console.log(primaryTitleW)
     if (primaries.length == 0) {
         primaryText = translator.getStr("skillsMin1");
     }
     if (primaries.length > 3) {
         primaryText = translator.getStr("skillsMax3");
     }
-    getContext().font = '26px franklin-gothic-book';
+    Context.font = '26px franklin-gothic-book';
     writeScaled(primaryText, { x: x + primaryTitleW, y: 890 });
-    let primaryTextW = getContext().measureText(primaryText).width;
-    console.log(primaryTextW)
+    let primaryTextW = Context.measureText(primaryText).width;
+    //console.log(primaryTextW)
     // secondaries
     if (secondaries.length < 2) {
         secondaryTitle = translator.getStr("skillsSecondary");
     } else {
         secondaryTitle = translator.getStr("skillsSecondaries");
     }
-    getContext().font = 'bold 26px franklin-gothic-book';
+    Context.font = 'bold 26px franklin-gothic-book';
     writeScaled(secondaryTitle, { x: x, y: 930 });
-    let secondaryTitleW = getContext().measureText(secondaryTitle).width;
-    console.log(secondaryTitleW)
+    let secondaryTitleW = Context.measureText(secondaryTitle).width;
+    //console.log(secondaryTitleW)
     if (secondaries.length == 0) {
         secondaryText = translator.getStr("skillsMin1");
     }
     if (secondaries.length > 3) {
         secondaryText = translator.getStr("skillsMax3");
     }
-    getContext().font = '26px franklin-gothic-book';
+    Context.font = '26px franklin-gothic-book';
     writeScaled(secondaryText, { x: x + secondaryTitleW, y: 930 });
-    let secondaryTextW = getContext().measureText(secondaryText).width;
-    console.log(secondaryTextW)
+    let secondaryTextW = Context.measureText(secondaryText).width;
+    //console.log(secondaryTextW)
 }
 
 
 function drawCardText(value) {
-    getContext().font = '36px franklin-gothic-book';
-    getContext().fillStyle = 'black';
-    getContext().textAlign = "left";
-    getContext().textBaseline = "middle";
+    Context = getContext();
+    Context.font = '36px franklin-gothic-book';
+    Context.fillStyle = 'black';
+    Context.textAlign = "left";
+    Context.textBaseline = "middle";
     if (value.length > 90) {
         lineHeight = 30;
     } else {
@@ -220,15 +260,18 @@ function drawCardText(value) {
 
 
 function drawCardTeamName(value) {
-    getContext().font = 'italic 40px brothers-regular';
-    getContext().fillStyle = 'black';
-    getContext().textAlign = "left";
-    getContext().textBaseline = "middle";
-    getContext().rotate(-6 * Math.PI / 180);
+    Context = getContext();
+    rotation = 6 * Math.PI / 180
+    Context.font = 'italic 40px brothers-regular';
+    Context.textAlign = "left";
+    Context.textBaseline = "middle";
+    Context.lineWidth = 0;
+    Context.rotate(- rotation);
+    Context.fillStyle = 'black';
     writeScaled(value, { x: 60 + 4, y: 125 + 4 });
-    getContext().fillStyle = 'white';
+    Context.fillStyle = 'white';
     writeScaled(value, { x: 60, y: 125 });
-    getContext().rotate(+6 * Math.PI / 180);
+    Context.rotate(+ rotation);
 }
 
 
@@ -269,22 +312,6 @@ function drawNumber(num, x, y, plus) {
     if (plus) {
         getContext().drawImage(document.getElementById('sf+'), x + width, y, 39, 70);
     }
-}
-
-
-function drawNumber2(num, x1, y1, plus) {
-    if (num < 1 || num > 11 ) {
-        num = '-';
-        plus = false;
-    }
-    size = 90;
-    offset = Math.round(size / 2);
-    y2 = y1 - offset
-    getContext().font = size + 'px brothers-regular';
-    getContext().fillStyle = 'white';
-    getContext().textAlign = "left";
-    getContext().textBaseline = "alphabetic";
-    writeScaled(num, { x: x1, y: y1 });
 }
 
 
@@ -381,13 +408,13 @@ function loadLatestPlayerData() {
     if (latestCardName == null) {
         latestCardName = "BloodBowl_Card";
     }
-    console.log("Loading '" + latestCardName + "'...");
+    //console.log("Loading '" + latestCardName + "'...");
     var data = loadPlayerData(latestCardName);
     if (data) {
-        console.log("Loaded data:");
-        console.log(data);
+        //console.log("Loaded data:");
+        //console.log(data);
     } else {
-        console.log("Failed to load data, loading defaults.");
+        //console.log("Failed to load data, loading defaults.");
         data = defaultPlayerData();
     }
     return data;
@@ -427,62 +454,9 @@ function onload2promise(obj) {
 }
 
 
-function printAtWordWrap(context, text, x, y, lineHeight, fitWidth) {
-    var lines = text.split('\n');
-    lineNum = 0;
-    for (var i = 0; i < lines.length; i++) {
-        fitWidth = fitWidth || 0;
-        if (fitWidth <= 0) {
-            context.fillText(lines[i], x, y + (lineNum * lineHeight));
-            lineNum ++;
-        }
-        var words = lines[i].split(' ');
-        var idx = 1;
-        while (words.length > 0 && idx <= words.length) {
-            var str = words.slice(0, idx).join(' ');
-            var w = context.measureText(str).width;
-            if (w > fitWidth) {
-                if (idx == 1) {
-                    idx = 2;
-                }
-                context.fillText(words.slice(0, idx - 1).join(' '), x, y + (lineNum * lineHeight));
-                lineNum ++;
-                words = words.splice(idx - 1);
-                idx = 1;
-            } else {
-                idx ++;
-            }
-        }
-        if (idx > 0) {
-            context.fillText(words.join(' '), x, y + (lineNum * lineHeight));
-            lineNum++;
-        }
-    }
-}
-
-
-function printWithMarkup(context, text_array, x, y, lineHeight) {
-    // table code style --> font style
-    // Text comes in as an array
-    // need to split it into lines
-    for (line in text_array) {
-        if (text_array[line].startsWith("**")) {
-            printText = text_array[line].replace("**", '');
-            context.font = 'bold 38px frutiger-light';
-            context.fillStyle = '#5B150F';
-            context.fillText(printText, x, y + (line * lineHeight));
-            context.font = '36px frutiger-light';
-            context.fillStyle = 'black';
-        } else {
-            context.fillText(text_array[line], x, y + (line * lineHeight));
-        }
-    }
-}
-
-
 function render(PlayerData) {
-    console.log("Render:");
-    console.log(PlayerData);
+    //console.log("Render:");
+    //console.log(PlayerData);
     // First the textured background
     getContext().drawImage(document.getElementById('bg1'), 0, 0, getCanvas().width, getCanvas().height);
     if (PlayerData.imageUrl) {
@@ -531,7 +505,7 @@ function savePlayerDataMap(newMap) {
 
 
 function setModelImage(image) {
-    console.log("setModelImage:" + image);
+    //console.log("setModelImage:" + image);
     $("#playerImageURL")[0].value = image;
     //  if (image != null) {
     // TODO: Not sure how to do this. It might not even be possible! Leave it for now...

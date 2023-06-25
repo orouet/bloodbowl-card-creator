@@ -23,19 +23,77 @@ function getScalingFactor(Canvas, Background) {
         x: Canvas.width / Background.width,
         y: Canvas.height / Background.height
     };
-    console.log(ScalingFactor);
+    //console.log(ScalingFactor);
     return ScalingFactor;
 }
 
 
+function printAtWordWrap(context, text, x, y, lineHeight, fitWidth) {
+    var lines = text.split('\n');
+    lineNum = 0;
+    for (var i = 0; i < lines.length; i++) {
+        fitWidth = fitWidth || 0;
+        if (fitWidth <= 0) {
+            context.fillText(lines[i], x, y + (lineNum * lineHeight));
+            lineNum ++;
+        }
+        var words = lines[i].split(' ');
+        var idx = 1;
+        while (words.length > 0 && idx <= words.length) {
+            var str = words.slice(0, idx).join(' ');
+            var w = context.measureText(str).width;
+            if (w > fitWidth) {
+                if (idx == 1) {
+                    idx = 2;
+                }
+                context.fillText(words.slice(0, idx - 1).join(' '), x, y + (lineNum * lineHeight));
+                lineNum ++;
+                words = words.splice(idx - 1);
+                idx = 1;
+            } else {
+                idx ++;
+            }
+        }
+        if (idx > 0) {
+            context.fillText(words.join(' '), x, y + (lineNum * lineHeight));
+            lineNum++;
+        }
+    }
+}
+
+
+function printWithMarkup(context, text_array, x1, y1, lineHeight) {
+    // table code style --> font style
+    // Text comes in as an array
+    // need to split it into lines
+    for (line in text_array) {
+        context.font = '36px frutiger-light';
+        context.fillStyle = 'black';
+        if (text_array[line].startsWith("**")) {
+            printText = text_array[line].replace("**", '');
+            context.font = 'bold 38px frutiger-light';
+            context.fillStyle = '#5B150F';
+        } else {
+            printText = text_array[line]
+        }
+        y2 = y1 + (line * lineHeight);
+        //context.fillText(printText, x1, y2);
+        writeScaled(printText, {x: x1, y: y2});
+    }
+}
+
+
 function scalePixelPosition(PixelPosition) {
+    //console.log(PixelPosition);
     var ScalingFactor = getScalingFactor(getCanvas(), getBackgroundImage());
     var ScaledPosition = {
         x: PixelPosition.x * ScalingFactor.x,
         y: PixelPosition.y * ScalingFactor.y
     };
+    //console.log(ScaledPosition);
     return ScaledPosition;
 }
+
 
 function splitWordWrap(Context, text, fitWidth) {
     // this was modified from the print version to only return the text array
@@ -74,20 +132,29 @@ function splitWordWrap(Context, text, fitWidth) {
 }
 
 
-function writeScaled(text, PixelPosition) {
+function writeScaled(text, PixelPosition, border = false) {
+    console.log(text)
+    console.log(PixelPosition)
     var ScaledPosition = scalePixelPosition(PixelPosition);
-    writeValue(getContext(), text, ScaledPosition);
+    console.log(ScaledPosition)
+    writeValue(getContext(), text, ScaledPosition, border);
 }
 
 
-function writeValue(Context, text, pos) {
-    var scale = getScalingFactor(getCanvas(), getBackgroundImage());
-    pos = {
-            x: pos.x / scale.x,
-            y: pos.y / scale.y
+function writeValue(Context, text, ScaledPosition, border = false) {
+    var ScalingFactor = getScalingFactor(getCanvas(), getBackgroundImage());
+    Position = {
+            x: ScaledPosition.x / ScalingFactor.x,
+            y: ScaledPosition.y / ScalingFactor.y
     };
+    console.log(Position)
     Context.save();
-    Context.scale(scale.x, scale.y);
-    Context.fillText(text, pos.x, pos.y);
+    Context.scale(ScalingFactor.x, ScalingFactor.y);
+    if (border) {
+        Context.strokeText(text, Position.x, Position.y);
+    }
+    Context.fillText(text, Position.x, Position.y);
     Context.restore();
 }
+
+
