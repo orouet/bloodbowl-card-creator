@@ -12,6 +12,11 @@ function addToImageCheckboxSelector(imgSrc, grid, bgColor) {
 }
 
 
+function getBackgroundImage() {
+    return document.getElementById('bg1');
+}
+
+
 function getCanvas() {
     return document.getElementById("canvas");
 }
@@ -19,11 +24,6 @@ function getCanvas() {
 
 function getContext() {
     return getCanvas().getContext("2d");
-}
-
-
-function getBackgroundImage() {
-    return document.getElementById('bg1');
 }
 
 
@@ -88,13 +88,14 @@ function drawCardFrame(PlayerData){
     drawCardSkills(primaries, secondaries);
     // MA
     drawNumber(PlayerData.ma, 130, 255, false);
+    drawNumber2(PlayerData.ma, 190, 320, false);
     // ST
     drawNumber(PlayerData.st, 130, 395, false);
     // AG
-    drawNumber(PlayerData.ag, 130, 530, true);
+    drawNumber(PlayerData.ag, 130, 535, true);
     // PA
     drawNumber(PlayerData.pa, 130, 670, true);
-    //AV
+    // AV
     drawNumber(PlayerData.av, 130, 805, true);
 }
 
@@ -224,7 +225,7 @@ function drawCardTeamName(value) {
     getContext().textAlign = "left";
     getContext().textBaseline = "middle";
     getContext().rotate(-6 * Math.PI / 180);
-    writeScaled(value, { x: 60 + 4, y: 125+4 });
+    writeScaled(value, { x: 60 + 4, y: 125 + 4 });
     getContext().fillStyle = 'white';
     writeScaled(value, { x: 60, y: 125 });
     getContext().rotate(+6 * Math.PI / 180);
@@ -247,7 +248,7 @@ function drawModel(imageUrl, imageProps) {
 }
 
 
-function drawNumber(num,x, y, plus) {
+function drawNumber(num, x, y, plus) {
     if (num < 1 || num > 11 ) {
         num = '-';
         plus = false;
@@ -268,6 +269,22 @@ function drawNumber(num,x, y, plus) {
     if (plus) {
         getContext().drawImage(document.getElementById('sf+'), x + width, y, 39, 70);
     }
+}
+
+
+function drawNumber2(num, x1, y1, plus) {
+    if (num < 1 || num > 11 ) {
+        num = '-';
+        plus = false;
+    }
+    size = 90;
+    offset = Math.round(size / 2);
+    y2 = y1 - offset
+    getContext().font = size + 'px brothers-regular';
+    getContext().fillStyle = 'white';
+    getContext().textAlign = "left";
+    getContext().textBaseline = "alphabetic";
+    writeScaled(num, { x: x1, y: y1 });
 }
 
 

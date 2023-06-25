@@ -23,6 +23,7 @@ function getScalingFactor(Canvas, Background) {
         x: Canvas.width / Background.width,
         y: Canvas.height / Background.height
     };
+    console.log(ScalingFactor);
     return ScalingFactor;
 }
 
@@ -36,7 +37,7 @@ function scalePixelPosition(PixelPosition) {
     return ScaledPosition;
 }
 
-function splitWordWrap(context, text, fitWidth) {
+function splitWordWrap(Context, text, fitWidth) {
     // this was modified from the print version to only return the text array
     return_array = [];
     var lines = text.split('\n');
@@ -51,7 +52,7 @@ function splitWordWrap(context, text, fitWidth) {
         var idx = 1;
         while (words.length > 0 && idx <= words.length) {
             var str = words.slice(0, idx).join(' ');
-            var w = context.measureText(str).width;
+            var w = Context.measureText(str).width;
             if (w > fitWidth) {
                 if (idx == 1) {
                     idx = 2;
@@ -73,20 +74,20 @@ function splitWordWrap(context, text, fitWidth) {
 }
 
 
-function writeScaled(value, pixelPos) {
-    var scaledPos = scalePixelPosition(pixelPos);
-    writeValue(getContext(), value, scaledPos);
+function writeScaled(text, PixelPosition) {
+    var ScaledPosition = scalePixelPosition(PixelPosition);
+    writeValue(getContext(), text, ScaledPosition);
 }
 
 
-function writeValue(ctx, value, pos) {
+function writeValue(Context, text, pos) {
     var scale = getScalingFactor(getCanvas(), getBackgroundImage());
     pos = {
             x: pos.x / scale.x,
             y: pos.y / scale.y
     };
-    ctx.save();
-    ctx.scale(scale.x, scale.y);
-    ctx.fillText(value, pos.x, pos.y);
-    ctx.restore();
+    Context.save();
+    Context.scale(scale.x, scale.y);
+    Context.fillText(text, pos.x, pos.y);
+    Context.restore();
 }
